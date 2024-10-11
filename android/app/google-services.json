@@ -7,9 +7,66 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1073912253938:android:fc0151622bfa9af17b2f6b",
+        "android_client_info": {
+          "package_name": "com.chatapp.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZgXaPRNp1GgBXtbZ4t0JuUTddSBqXntQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1073912253938:android:5acaf30dbda4a0207b2f6b",
         "android_client_info": {
           "package_name": "com.ehsanjavan.chatapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZgXaPRNp1GgBXtbZ4t0JuUTddSBqXntQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1073912253938:android:be9aae08d2ee0ee07b2f6b",
+        "android_client_info": {
+          "package_name": "com.ehsanjavdan.chatapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZgXaPRNp1GgBXtbZ4t0JuUTddSBqXntQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1073912253938:android:846d0f8f68ed9a7e7b2f6b",
+        "android_client_info": {
+          "package_name": "com.example.chat_app"
         }
       },
       "oauth_client": [],
