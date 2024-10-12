@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,17 +16,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> fetchUsers() async {
     try {
-      QuerySnapshot usersSnapshot =
-          await FirebaseFirestore.instance.collection('users').get();
+    String? currentUserEmail = FirebaseAuth.instance.currentUser!.email;
 
-      List<DocumentSnapshot> usersDocs = usersSnapshot.docs;
+    QuerySnapshot usersSnapshot = await FirebaseFirestore.instance.collection('users').get();
 
-      for (var doc in usersDocs) {
-        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+    List<DocumentSnapshot> usersDocs = usersSnapshot.docs;
 
-        String userEmail = data['email'];
+    for (var doc in usersDocs) {
+      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+
+      String userEmail = data['email'];
+      
+      if (userEmail.trim() != currentUserEmail) {
         users.add(userEmail);
       }
+    }
 
       setState(() {});
     } catch (error) {
@@ -44,7 +50,8 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.grey[300],
       drawer: Drawer(
         child: Padding(
-          padding: const EdgeInsets.only(top: 70, bottom: 30 ,right: 20, left: 20),
+          padding:
+              const EdgeInsets.only(top: 70, bottom: 30, right: 20, left: 20),
           child: Column(
             children: [
               Image.asset(
@@ -69,6 +76,10 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const Spacer(),
               ListTile(
+                onTap: () {
+                  FirebaseAuth.instance.signOut();
+                  context.go('/');
+                },
                 title: const Text('L O G O U T'),
                 leading: Icon(
                   Icons.logout,
