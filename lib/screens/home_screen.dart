@@ -99,37 +99,39 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: ListView.builder(
-            itemCount: users.length,
-            itemBuilder: (ctx, index) {
-              return GestureDetector(
-                onTap: () {
-                  context.go(
-                    '/chat_screen',
-                    extra: users[index],
-                  );
-                },
-                child: Card(
-                  elevation: 20,
-                  margin: const EdgeInsets.all(10),
-                  child: Padding(
-                    padding: const EdgeInsets.all(24),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.person,
-                          color: Colors.grey[600],
-                        ),
-                        const SizedBox(width: 16),
-                        Text(
-                          users[index],
-                          style: GoogleFonts.roboto(),
-                        ),
-                      ],
-                    ),
+          itemCount: users.length,
+          itemBuilder: (ctx, index) {
+            return GestureDetector(
+              onTap: () {
+                context.go(
+                  '/chat_screen',
+                  extra: users[index],
+                );
+              },
+              child: Card(
+                color: Colors.white,
+                elevation: 20,
+                margin: const EdgeInsets.all(10),
+                child: Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.person,
+                        color: Colors.grey[600],
+                      ),
+                      const SizedBox(width: 16),
+                      Text(
+                        users[index],
+                        style: GoogleFonts.roboto(),
+                      ),
+                    ],
                   ),
                 ),
-              );
-            }),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
