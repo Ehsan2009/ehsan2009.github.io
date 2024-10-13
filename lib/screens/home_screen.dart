@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -48,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       drawer: Drawer(
         child: Padding(
           padding:
@@ -69,6 +68,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               ListTile(
+                onTap: () {
+                  context.go('/settings_screen');
+                },
                 title: const Text('S E T T I N G S'),
                 leading: Icon(
                   Icons.settings,
@@ -92,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       appBar: AppBar(
-        backgroundColor: Colors.grey[300],
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         title: const Text('U S E R S'),
         centerTitle: true,
       ),
@@ -109,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               },
               child: Card(
-                color: Colors.white,
+                color: Theme.of(context).cardTheme.color,
                 elevation: 20,
                 margin: const EdgeInsets.all(10),
                 child: Padding(
@@ -118,12 +120,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Icon(
                         Icons.person,
-                        color: Colors.grey[600],
+                        color: Colors.grey[500],
                       ),
                       const SizedBox(width: 16),
                       Text(
                         users[index],
-                        style: GoogleFonts.roboto(),
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ],
                   ),

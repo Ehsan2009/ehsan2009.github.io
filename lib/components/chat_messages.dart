@@ -15,6 +15,10 @@ class ChatMessages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Brightness brightness = Theme.of(context).brightness;
+
+    bool isDarkMode = brightness == Brightness.dark;
+
     return StreamBuilder(
       stream: FirebaseFirestore.instance
           .collection('chatRooms')
@@ -36,8 +40,6 @@ class ChatMessages extends StatelessWidget {
         return ListView.builder(
           padding: const EdgeInsets.only(
             bottom: 40,
-            left: 10,
-            right: 10,
           ),
           reverse: true,
           itemCount: docs.length,
@@ -53,7 +55,13 @@ class ChatMessages extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 25),
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: isMe ? Colors.green : Colors.white,
+                  color: isDarkMode
+                      ? isMe
+                          ? Colors.green
+                          : Colors.grey[800]
+                      : isMe
+                          ? Colors.green
+                          : Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: !isMe ? Radius.zero : const Radius.circular(12),
                     topRight: isMe ? Radius.zero : const Radius.circular(12),
@@ -64,9 +72,13 @@ class ChatMessages extends StatelessWidget {
                 child: Text(
                   message,
                   softWrap: true,
-                  style: GoogleFonts.roboto(
-                    color: isMe ? Colors.white : Colors.black,
-                  ),
+                  style: isDarkMode
+                      ? GoogleFonts.roboto(
+                          color: Colors.white,
+                        )
+                      : GoogleFonts.roboto(
+                          color: isMe ? Colors.white : Colors.black,
+                        ),
                 ),
               ),
             );

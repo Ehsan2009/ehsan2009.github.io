@@ -65,9 +65,9 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.grey[300],
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         title: Text(
           widget.userEmail,
           style: GoogleFonts.roboto(
@@ -87,7 +87,7 @@ class _ChatScreenState extends State<ChatScreen> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.all(1),
         child: Column(
           children: [
             // chat messages
@@ -99,57 +99,60 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
 
             // sending a new message
-            Row(
-              children: [
-                // message textformfield
-                Expanded(
-                  child: TextField(
-                    controller: messageController,
-                    cursorColor: Colors.black,
-                    decoration: InputDecoration(
-                      hintText: 'Type a message',
-                      hintStyle: TextStyle(color: Colors.grey[500]),
-                      fillColor: Colors.white54,
-                      filled: true,
-                      floatingLabelBehavior: FloatingLabelBehavior.never,
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        borderSide: const BorderSide(
-                          color: Colors.white,
+            Padding(
+              padding: const EdgeInsets.all(24),
+              child: Row(
+                children: [
+                  // message textformfield
+                  Expanded(
+                    child: TextField(
+                      controller: messageController,
+                      cursorColor: Colors.black,
+                      decoration: InputDecoration(
+                        hintText: 'Type a message',
+                        hintStyle: Theme.of(context).textTheme.labelMedium,
+                        fillColor: Colors.white54,
+                        filled: true,
+                        floatingLabelBehavior: FloatingLabelBehavior.never,
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: const BorderSide(
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        borderSide: const BorderSide(
-                          color: Colors.white,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: const BorderSide(
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
 
-                const SizedBox(width: 16),
+                  const SizedBox(width: 16),
 
-                // sending button
-                FloatingActionButton(
-                  onPressed: () {
-                    sendMessage(
-                      roomId,
-                      messageController.text,
-                      FirebaseAuth.instance.currentUser!.uid,
-                    );
-                  },
-                  elevation: 0,
-                  shape: const CircleBorder(),
-                  backgroundColor: Colors.green,
-                  child: isAuthenticating
-                      ? const CircularProgressIndicator()
-                      : const Icon(
-                          Icons.arrow_upward_outlined,
-                          color: Colors.white,
-                        ),
-                ),
-              ],
+                  // sending button
+                  FloatingActionButton(
+                    onPressed: () {
+                      sendMessage(
+                        roomId,
+                        messageController.text,
+                        FirebaseAuth.instance.currentUser!.uid,
+                      );
+                    },
+                    elevation: 0,
+                    shape: const CircleBorder(),
+                    backgroundColor: Colors.green,
+                    child: isAuthenticating
+                        ? const CircularProgressIndicator()
+                        : const Icon(
+                            Icons.arrow_upward_outlined,
+                            color: Colors.white,
+                          ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
