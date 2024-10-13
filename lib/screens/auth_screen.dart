@@ -52,7 +52,7 @@ class _AuthScreenState extends State<AuthScreen> {
         await FirebaseFirestore.instance
             .collection('users')
             .doc(FirebaseAuth.instance.currentUser!.uid)
-            .set({'email': enteredEmail});
+            .set({'email': enteredEmail.trim()});
       }
 
       context.go('/');
@@ -131,7 +131,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       return null;
                     },
                     onSaved: (value) {
-                      enteredEmail = value!;
+                      enteredEmail = value!.trim();
                     },
                   ),
 

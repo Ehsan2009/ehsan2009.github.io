@@ -16,21 +16,22 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> fetchUsers() async {
     try {
-    String? currentUserEmail = FirebaseAuth.instance.currentUser!.email;
+      String? currentUserEmail = FirebaseAuth.instance.currentUser!.email;
 
-    QuerySnapshot usersSnapshot = await FirebaseFirestore.instance.collection('users').get();
+      QuerySnapshot usersSnapshot =
+          await FirebaseFirestore.instance.collection('users').get();
 
-    List<DocumentSnapshot> usersDocs = usersSnapshot.docs;
+      List<DocumentSnapshot> usersDocs = usersSnapshot.docs;
 
-    for (var doc in usersDocs) {
-      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+      for (var doc in usersDocs) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
-      String userEmail = data['email'];
-      
-      if (userEmail.trim() != currentUserEmail) {
-        users.add(userEmail);
+        String userEmail = data['email'];
+
+        if (userEmail.trim() != currentUserEmail) {
+          users.add(userEmail);
+        }
       }
-    }
 
       setState(() {});
     } catch (error) {
@@ -100,23 +101,31 @@ class _HomeScreenState extends State<HomeScreen> {
         child: ListView.builder(
             itemCount: users.length,
             itemBuilder: (ctx, index) {
-              return Card(
-                elevation: 20,
-                margin: const EdgeInsets.all(10),
-                child: Padding(
-                  padding: const EdgeInsets.all(24),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.person,
-                        color: Colors.grey[600],
-                      ),
-                      const SizedBox(width: 16),
-                      Text(
-                        users[index],
-                        style: GoogleFonts.roboto(),
-                      ),
-                    ],
+              return GestureDetector(
+                onTap: () {
+                  context.go(
+                    '/chat_screen',
+                    extra: users[index],
+                  );
+                },
+                child: Card(
+                  elevation: 20,
+                  margin: const EdgeInsets.all(10),
+                  child: Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.person,
+                          color: Colors.grey[600],
+                        ),
+                        const SizedBox(width: 16),
+                        Text(
+                          users[index],
+                          style: GoogleFonts.roboto(),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );
