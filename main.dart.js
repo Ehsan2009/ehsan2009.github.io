@@ -7993,12 +7993,12 @@ alL:function alL(a){this.a=a},
 alK:function alK(){},
 aWV(){return new A.t5()},
 t5:function t5(){this.a=$},
-b1r(a){var s,r="auth",q=null,p="settings",o=a.iy($.KL(),t.m0),n=o.a
-n=n.agw(n.gpI().jx())
-n=A.aTk(new A.e_(o.ga7O(),n,n.$ti.i("e_<bF.T,pJ?>")))
+b1r(a){var s,r=null,q="settings",p=a.iy($.KL(),t.m0),o=p.a
+o=o.agw(o.gpI().jx())
+o=A.aTk(new A.e_(p.ga7O(),o,o.$ti.i("e_<bF.T,pJ?>")))
 s=t.yo
-s=A.b([A.O1(new A.ayZ(),r,r,B.h6),A.O1(new A.az_(),"chatList","chat-list",A.b([A.O1(new A.az0(),"chatRoom","chat-room",B.h6),A.O1(new A.az1(),p,p,B.h6)],s))],s)
-return A.aTj(!1,new A.az2(),q,q,q,r,q,q,q,!1,n,!0,q,!1,new A.Up(new A.ajU(s,new A.az3(o),5)))},
+s=A.b([A.O1(new A.ayZ(),"auth","/auth",B.h6),A.O1(new A.az_(),"chatList","/chat-list",A.b([A.O1(new A.az0(),"chatRoom","chat-room",B.h6),A.O1(new A.az1(),q,q,B.h6)],s))],s)
+return A.aTj(!1,new A.az2(),r,r,r,"/auth",r,r,r,!1,o,!0,r,!1,new A.Up(new A.ajU(s,new A.az3(p),5)))},
 az3:function az3(a){this.a=a},
 ayZ:function ayZ(){},
 az_:function az_(){},
@@ -43844,7 +43844,7 @@ $2(a,b){var s,r,q=this.a.a.giU()
 q=q!=null?A.aAl(q):null
 s=b.b
 r=s.gbF(s)
-if(q!=null){if(r==="auth")return"chat-list"}else if(r==="/chat-list"||r==="/chat-room"||r==="/settings")return"auth"
+if(q!=null){if(r==="/auth")return"/chat-list"}else if(r==="/chat-list"||r==="/chat-room"||r==="/settings")return"/auth"
 return null},
 $S:321}
 A.ayZ.prototype={
