@@ -7996,7 +7996,7 @@ b1q(a){var s,r=null,q=a.iy($.KL(),t.m0),p=q.a
 p=p.agw(p.gpI().jx())
 p=A.aTj(new A.e_(q.ga7O(),p,p.$ti.i("e_<bF.T,pJ?>")))
 s=t.yo
-s=A.b([A.O1(new A.ayZ(),"auth","/auth",B.h6),A.O1(new A.az_(),"chatList","/chat-list",A.b([A.O1(new A.az0(),"chatRoom","/chat-list/chat-room",B.h6),A.O1(new A.az1(),"settings","/chat-list/settings",B.h6)],s))],s)
+s=A.b([A.O1(new A.ayZ(),"auth","/",B.h6),A.O1(new A.az_(),"chatList","/chat-list",A.b([A.O1(new A.az0(),"chatRoom","/chat-list/chat-room",B.h6),A.O1(new A.az1(),"settings","/chat-list/settings",B.h6)],s))],s)
 return A.aTi(!1,new A.az2(),r,r,r,"/auth",r,r,r,!1,p,!0,r,!1,new A.Up(new A.ajU(s,new A.az3(q),5)))},
 az3:function az3(a){this.a=a},
 ayZ:function ayZ(){},
@@ -43839,7 +43839,7 @@ $2(a,b){var s,r,q=this.a.a.giU()
 q=q!=null?A.aAl(q):null
 s=b.b
 r=s.gbF(s)
-if(q!=null){if(r==="/auth")return"/chat-list"}else if(r==="/chat-list"||r==="/chat-room"||r==="/settings")return"/auth"
+if(q!=null){if(r==="/")return"/chat-list"}else if(r==="/chat-list"||r==="/chat-room"||r==="/settings")return"/"
 return null},
 $S:321}
 A.ayZ.prototype={
