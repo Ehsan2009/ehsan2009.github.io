@@ -1,19 +1,15 @@
+import 'package:chat_app/src/features/settings/presentation/settings_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class SettingsScreen extends StatefulWidget {
+class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
-}
-
-class _SettingsScreenState extends State<SettingsScreen> {
-  @override
-  Widget build(BuildContext context) {
-    // final themeProvider = Provider.of<ThemeProvider>(context);
-    // bool isDarkMode = themeProvider.isDarkMode();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentThemeMode = ref.watch(settingsControllerProvider);
 
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -52,12 +48,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
               const Spacer(),
-              // Switch(
-              //   value: isDarkMode,
-              //   onChanged: (value) {
-              //     themeProvider.toggleTheme();
-              //   },
-              // ),
+              Switch(
+                value: currentThemeMode == ThemeMode.dark ? true : false,
+                onChanged: (value) {
+                  ref.read(settingsControllerProvider.notifier).toggleTheme();
+                },
+              ),
             ],
           ),
         ),

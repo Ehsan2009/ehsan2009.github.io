@@ -1,12 +1,16 @@
+import 'package:chat_app/src/features/settings/presentation/settings_controller.dart';
 import 'package:chat_app/src/routing/app_router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(settingsControllerProvider);
+    
     return MaterialApp.router(
       darkTheme: ThemeData.dark().copyWith(
         textTheme:  GoogleFonts.robotoTextTheme().copyWith(
@@ -35,7 +39,7 @@ class MyApp extends StatelessWidget {
           color: Colors.white,
         ),
       ),
-      // themeMode: themeProvider.themeMode,
+      themeMode: themeMode,
       debugShowCheckedModeBanner: false,
       routerConfig: goRouter,
     );
