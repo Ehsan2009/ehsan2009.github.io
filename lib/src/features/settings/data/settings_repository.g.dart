@@ -1,27 +1,29 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'settings_controller.dart';
+part of 'settings_repository.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$settingsControllerHash() =>
-    r'8c87d99e2a47325f37bf9705137fd43588c874b9';
+String _$settingsRepositoryHash() =>
+    r'5849d89f9468753266ce5aa638352968fc190910';
 
-/// See also [SettingsController].
-@ProviderFor(SettingsController)
-final settingsControllerProvider =
-    AutoDisposeNotifierProvider<SettingsController, ThemeMode>.internal(
-  SettingsController.new,
-  name: r'settingsControllerProvider',
+/// See also [settingsRepository].
+@ProviderFor(settingsRepository)
+final settingsRepositoryProvider =
+    AutoDisposeProvider<SettingsRepository>.internal(
+  settingsRepository,
+  name: r'settingsRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$settingsControllerHash,
+      : _$settingsRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$SettingsController = AutoDisposeNotifier<ThemeMode>;
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef SettingsRepositoryRef = AutoDisposeProviderRef<SettingsRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
