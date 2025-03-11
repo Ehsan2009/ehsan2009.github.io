@@ -1,4 +1,3 @@
-import 'package:chat_app/src/features/settings/presentation/theme_provider.dart';
 import 'package:chat_app/src/routing/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,9 +9,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       darkTheme: ThemeData.dark().copyWith(
-        textTheme: const TextTheme().copyWith(
-            bodyMedium: GoogleFonts.roboto(color: Colors.white),
-            labelMedium: GoogleFonts.roboto(color: Colors.grey[300])),
+        textTheme:  GoogleFonts.robotoTextTheme().copyWith(
+            bodyMedium: const TextStyle(color: Colors.white),
+            labelMedium: TextStyle(color: Colors.grey[300])),
         scaffoldBackgroundColor: const Color.fromARGB(255, 49, 45, 45),
         appBarTheme: AppBarTheme.of(context).copyWith(
           backgroundColor: const Color.fromARGB(255, 49, 45, 45),
@@ -23,9 +22,9 @@ class MyApp extends StatelessWidget {
         ),
       ),
       theme: ThemeData().copyWith(
-        textTheme: const TextTheme().copyWith(
-          bodyMedium: GoogleFonts.roboto(color: Colors.black),
-          labelMedium: GoogleFonts.roboto(color: Colors.grey[600]),
+        textTheme: GoogleFonts.robotoTextTheme().copyWith(
+          bodyMedium: const TextStyle(color: Colors.black),
+          labelMedium: TextStyle(color: Colors.grey[600]),
         ),
         scaffoldBackgroundColor: Colors.grey[300],
         appBarTheme: AppBarTheme.of(context).copyWith(

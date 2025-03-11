@@ -1,8 +1,7 @@
-import 'package:chat_app/src/features/authentication/data/auth_repository.dart';
-import 'package:chat_app/src/features/authentication/presentation/auth_controller.dart';
-import 'package:chat_app/src/features/authentication/presentation/widgets/auth_submit_button.dart';
-import 'package:chat_app/src/features/authentication/presentation/widgets/auth_text_form_field.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:chat_app/src/features/authentication/presentation/auth/auth_controller.dart';
+import 'package:chat_app/src/features/authentication/presentation/auth/widgets/auth_mode_switch.dart';
+import 'package:chat_app/src/features/authentication/presentation/auth/widgets/auth_submit_button.dart';
+import 'package:chat_app/src/features/authentication/presentation/auth/widgets/auth_text_form_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -174,29 +173,13 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                   const SizedBox(height: 40),
 
                   // switching between login and sign up modes
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        isLogin ? 'Not a member' : 'Already a member?',
-                        style: GoogleFonts.roboto(color: Colors.grey[700]),
-                      ),
-                      const SizedBox(width: 5),
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            isLogin = !isLogin;
-                          });
-                        },
-                        child: Text(
-                          isLogin ? 'Register now' : 'Login now',
-                          style: GoogleFonts.roboto(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
+                  AuthModeSwitch(
+                    onTap: () {
+                      setState(() {
+                        isLogin = !isLogin;
+                      });
+                    },
+                    isLogin: isLogin,
                   ),
                 ],
               ),

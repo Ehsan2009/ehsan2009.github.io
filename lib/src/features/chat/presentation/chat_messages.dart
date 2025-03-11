@@ -1,31 +1,28 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:chat_app/src/features/chat/application/chat_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ChatMessages extends StatelessWidget {
+class ChatMessages extends ConsumerWidget {
   const ChatMessages({
     super.key,
     required this.otherUserEmail,
-    required this.roomId,
+    required this.roomID,
   });
 
   final String otherUserEmail;
-  final String roomId;
+  final String roomID;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final Brightness brightness = Theme.of(context).brightness;
+    final chatService = ref.watch(chatServiceProvider);
 
     bool isDarkMode = brightness == Brightness.dark;
 
     return StreamBuilder(
-      stream: FirebaseFirestore.instance
-          .collection('chatRooms')
-          .doc(roomId)
-          .collection('messages')
-          .orderBy('timestamp', descending: true)
-          .snapshots(),
+      stream: chatService.getMessages(roomID),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Text('is loading...');
@@ -44,8 +41,8 @@ class ChatMessages extends StatelessWidget {
           reverse: true,
           itemCount: docs.length,
           itemBuilder: (context, index) {
-            var message = docs[index]['message'];
-            var userId = docs[index]['senderId'];
+            var message = docs[index]['content'];
+            var userId = docs[index]['senderID'];
 
             bool isMe = FirebaseAuth.instance.currentUser!.uid == userId;
 

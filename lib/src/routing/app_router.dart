@@ -1,8 +1,8 @@
-import 'package:chat_app/src/features/authentication/presentation/auth_screen.dart';
+import 'package:chat_app/src/features/authentication/presentation/auth/auth_screen.dart';
 import 'package:chat_app/src/features/chat/presentation/chat_screen.dart';
 import 'package:chat_app/src/features/chat/presentation/home_screen.dart';
 import 'package:chat_app/src/features/settings/presentation/settings_screen.dart';
-import 'package:chat_app/src/features/authentication/presentation/splash_screen.dart';
+import 'package:chat_app/src/features/authentication/presentation/splash/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final goRouter = GoRouter(

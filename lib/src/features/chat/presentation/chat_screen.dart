@@ -1,11 +1,15 @@
+import 'package:chat_app/src/features/authentication/data/auth_repository.dart';
+import 'package:chat_app/src/features/chat/application/chat_service.dart';
+import 'package:chat_app/src/features/chat/domain/message.dart';
+import 'package:chat_app/src/features/chat/presentation/chat_controller.dart';
 import 'package:chat_app/src/features/chat/presentation/chat_messages.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ChatScreen extends StatefulWidget {
+class ChatScreen extends ConsumerStatefulWidget {
   const ChatScreen({
     super.key,
     required this.userEmail,
@@ -14,56 +18,34 @@ class ChatScreen extends StatefulWidget {
   final String userEmail;
 
   @override
-  State<ChatScreen> createState() => _ChatScreenState();
+  ConsumerState<ChatScreen> createState() => _ChatScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
-  late String roomId;
+class _ChatScreenState extends ConsumerState<ChatScreen> {
+  late String roomID;
   var messageController = TextEditingController();
-  bool isAuthenticating = false;
 
-  String generateRoomId(String? userId1, String userId2) {
-    List<String> ids = [
-      userId1!.toLowerCase().trim(),
-      userId2.toLowerCase().trim()
-    ];
-    ids.sort();
-    return ids.join('_');
-  }
-
-  void sendMessage(String roomId, String message, String senderId) async {
-    setState(() {
-      isAuthenticating = true;
-    });
-
-    await FirebaseFirestore.instance
-        .collection('chatRooms')
-        .doc(roomId)
-        .collection('messages')
-        .add({
-      'message': message,
-      'senderId': senderId,
-      'timestamp': FieldValue.serverTimestamp(),
-    });
+  void sendMessage(Message message) async {
+    ref.read(chatControllerProvider.notifier).sendMessage(message);
 
     messageController.clear();
-
-    setState(() {
-      isAuthenticating = false;
-    });
   }
 
   @override
-  void initState() {
-    super.initState();
-    roomId = generateRoomId(
-      FirebaseAuth.instance.currentUser!.email,
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final chatService = ref.watch(chatServiceProvider);
+    roomID = chatService.generateRoomId(
+      FirebaseAuth.instance.currentUser!.email!,
       widget.userEmail,
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final state = ref.watch(chatControllerProvider);
+    final currentUser = ref.read(authRepositoryProvider).currentUser;
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
@@ -94,7 +76,7 @@ class _ChatScreenState extends State<ChatScreen> {
             Expanded(
               child: ChatMessages(
                 otherUserEmail: widget.userEmail,
-                roomId: roomId,
+                roomID: roomID,
               ),
             ),
 
@@ -136,15 +118,18 @@ class _ChatScreenState extends State<ChatScreen> {
                   FloatingActionButton(
                     onPressed: () {
                       sendMessage(
-                        roomId,
-                        messageController.text,
-                        FirebaseAuth.instance.currentUser!.uid,
+                        Message(
+                          content: messageController.text,
+                          roomID: roomID,
+                          senderID: currentUser!.id,
+                          timestamp: DateTime.now(),
+                        ),
                       );
                     },
                     elevation: 0,
                     shape: const CircleBorder(),
                     backgroundColor: Colors.green,
-                    child: isAuthenticating
+                    child: state.isLoading
                         ? const CircularProgressIndicator()
                         : const Icon(
                             Icons.arrow_upward_outlined,

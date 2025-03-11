@@ -1,5 +1,4 @@
 import 'package:chat_app/src/features/authentication/domain/app_user.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -9,7 +8,6 @@ part 'auth_repository.g.dart';
 class AuthRepository {
   AuthRepository(this._auth);
   final FirebaseAuth _auth;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<void> signInWithEmailAndPassword(String email, String password) {
     return _auth.signInWithEmailAndPassword(
@@ -42,10 +40,4 @@ class AuthRepository {
 @Riverpod(keepAlive: true)
 AuthRepository authRepository(Ref ref) {
   return AuthRepository(FirebaseAuth.instance);
-}
-
-@Riverpod(keepAlive: true)
-Stream<AppUser?> authStateChanges(Ref ref) {
-  final authRepository = ref.watch(authRepositoryProvider);
-  return authRepository.authStateChanges();
 }

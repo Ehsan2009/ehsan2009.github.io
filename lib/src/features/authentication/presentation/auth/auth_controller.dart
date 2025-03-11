@@ -1,6 +1,5 @@
 import 'package:chat_app/src/features/authentication/data/auth_repository.dart';
-import 'package:chat_app/src/features/authentication/domain/app_user.dart';
-import 'package:chat_app/src/features/authentication/presentation/auth_screen.dart';
+import 'package:chat_app/src/features/authentication/presentation/auth/auth_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
