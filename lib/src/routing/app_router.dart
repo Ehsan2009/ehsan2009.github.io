@@ -1,6 +1,6 @@
 import 'package:chat_app/src/features/authentication/presentation/auth/auth_screen.dart';
-import 'package:chat_app/src/features/chat/presentation/chat_screen.dart';
-import 'package:chat_app/src/features/chat/presentation/home_screen.dart';
+import 'package:chat_app/src/features/chat/presentation/chat_room/chat_room_screen.dart';
+import 'package:chat_app/src/features/chat/presentation/chat_list/chat_list_screen.dart';
 import 'package:chat_app/src/features/settings/presentation/settings_screen.dart';
 import 'package:chat_app/src/features/authentication/presentation/splash/splash_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -17,13 +17,13 @@ final goRouter = GoRouter(
     ),
     GoRoute(
       path: '/home_screen',
-      builder: (context, state) => const HomeScreen(),
+      builder: (context, state) => const ChatListScreen(),
     ),
     GoRoute(
       path: '/chat_screen',
       builder: (context, state) {
         String userEmail = state.extra as String;
-        return ChatScreen(userEmail: userEmail);
+        return ChatRoomScreen(userEmail: userEmail);
       },
     ),
     GoRoute(

@@ -17,13 +17,34 @@ class ChatRepository {
         .add(message.toJson());
   }
 
-    Stream<QuerySnapshot> getMessages(String roomId) {
+  Stream<QuerySnapshot> getMessages(String roomId) {
     return _firestore
         .collection('chatRooms')
         .doc(roomId)
         .collection('messages')
         .orderBy('timestamp', descending: true)
         .snapshots();
+  }
+
+  Future<List<String>> fetchUsersEmail(String currentUserEmail) async {
+    List<String> users = [];
+
+    QuerySnapshot usersSnapshot =
+        await FirebaseFirestore.instance.collection('users').get();
+
+    List<DocumentSnapshot> usersDocs = usersSnapshot.docs;
+
+    for (var doc in usersDocs) {
+      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+
+      String userEmail = data['email'];
+
+      if (userEmail.trim() != currentUserEmail) {
+        users.add(userEmail);
+      }
+    }
+
+    return users;
   }
 }
 

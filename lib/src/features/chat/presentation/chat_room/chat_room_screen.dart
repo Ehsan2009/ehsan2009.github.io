@@ -1,16 +1,16 @@
 import 'package:chat_app/src/features/authentication/data/auth_repository.dart';
 import 'package:chat_app/src/features/chat/application/chat_service.dart';
 import 'package:chat_app/src/features/chat/domain/message.dart';
-import 'package:chat_app/src/features/chat/presentation/chat_controller.dart';
-import 'package:chat_app/src/features/chat/presentation/chat_messages.dart';
+import 'package:chat_app/src/features/chat/presentation/chat_room/chat_room_controller.dart';
+import 'package:chat_app/src/features/chat/presentation/chat_room/chat_messages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ChatScreen extends ConsumerStatefulWidget {
-  const ChatScreen({
+class ChatRoomScreen extends ConsumerStatefulWidget {
+  const ChatRoomScreen({
     super.key,
     required this.userEmail,
   });
@@ -18,15 +18,15 @@ class ChatScreen extends ConsumerStatefulWidget {
   final String userEmail;
 
   @override
-  ConsumerState<ChatScreen> createState() => _ChatScreenState();
+  ConsumerState<ChatRoomScreen> createState() => _ChatRoomScreenState();
 }
 
-class _ChatScreenState extends ConsumerState<ChatScreen> {
+class _ChatRoomScreenState extends ConsumerState<ChatRoomScreen> {
   late String roomID;
   var messageController = TextEditingController();
 
   void sendMessage(Message message) async {
-    ref.read(chatControllerProvider.notifier).sendMessage(message);
+    ref.read(chatRoomControllerProvider.notifier).sendMessage(message);
 
     messageController.clear();
   }
@@ -43,7 +43,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(chatControllerProvider);
+    final state = ref.watch(chatRoomControllerProvider);
     final currentUser = ref.read(authRepositoryProvider).currentUser;
 
     return Scaffold(

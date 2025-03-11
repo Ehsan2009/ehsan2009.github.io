@@ -1,6 +1,6 @@
 import 'package:chat_app/src/features/authentication/data/auth_repository.dart';
 import 'package:chat_app/src/features/authentication/presentation/auth/auth_screen.dart';
-import 'package:chat_app/src/features/chat/presentation/home_screen.dart';
+import 'package:chat_app/src/features/chat/presentation/chat_list/chat_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -21,7 +21,7 @@ class SplashScreen extends ConsumerWidget {
         }
 
         if (snapshot.hasData) {
-          return const HomeScreen();
+          return const ChatListScreen();
         }
 
         return const AuthScreen();
