@@ -20,13 +20,13 @@ class AuthTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      cursorColor: Colors.black,
+      cursorColor: Theme.of(context).colorScheme.primary,
       obscureText: obscureText ?? false,
-      style: const TextStyle(color: Colors.black),
+      style: TextStyle(color: Theme.of(context).colorScheme.secondary),
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: TextStyle(color: Colors.grey[500]),
-        fillColor: Colors.white54,
+        // fillColor: Colors.white54,
         filled: true,
         floatingLabelBehavior: FloatingLabelBehavior.never,
         focusedBorder: OutlineInputBorder(

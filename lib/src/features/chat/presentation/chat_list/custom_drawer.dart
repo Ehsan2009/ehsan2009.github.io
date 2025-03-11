@@ -1,12 +1,16 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:chat_app/src/features/authentication/data/auth_repository.dart';
+import 'package:chat_app/src/routing/app_router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class CustomDrawer extends StatelessWidget {
+class CustomDrawer extends ConsumerWidget {
   const CustomDrawer({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final authRepository = ref.watch(authRepositoryProvider);
+    
     return Drawer(
         child: Padding(
           padding: const EdgeInsets.only(
@@ -32,7 +36,7 @@ class CustomDrawer extends StatelessWidget {
               ),
               ListTile(
                 onTap: () {
-                  context.go('/settings_screen');
+                  context.pushNamed(AppRoute.settings.name);
                 },
                 title: const Text('S E T T I N G S'),
                 leading: Icon(
@@ -43,8 +47,8 @@ class CustomDrawer extends StatelessWidget {
               const Spacer(),
               ListTile(
                 onTap: () {
-                  FirebaseAuth.instance.signOut();
-                  context.go('/');
+                  authRepository.signOut();
+                  context.goNamed(AppRoute.splash.name);
                 },
                 title: const Text('L O G O U T'),
                 leading: Icon(

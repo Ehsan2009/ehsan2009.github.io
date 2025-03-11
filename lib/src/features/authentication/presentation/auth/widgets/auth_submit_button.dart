@@ -22,15 +22,20 @@ class AuthSubmitButton extends StatelessWidget {
         height: 75,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: Colors.white70,
+          color: Theme.of(context).colorScheme.secondary,
           borderRadius: BorderRadius.circular(16),
         ),
         child: isAuthenticating
-            ? const CircularProgressIndicator()
+            ? CircularProgressIndicator(
+              color: Theme.of(context).colorScheme.onPrimary,
+            )
             : Text(
                 isLogin ? 'Login' : 'Sign Up',
-                style: GoogleFonts.roboto(
-                    fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSecondary,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
       ),
     );

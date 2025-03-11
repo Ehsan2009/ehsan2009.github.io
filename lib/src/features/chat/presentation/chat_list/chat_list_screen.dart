@@ -1,5 +1,6 @@
 import 'package:chat_app/src/features/chat/application/chat_service.dart';
 import 'package:chat_app/src/features/chat/presentation/chat_list/custom_drawer.dart';
+import 'package:chat_app/src/routing/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -33,8 +34,8 @@ class ChatListScreen extends ConsumerWidget {
                 itemBuilder: (ctx, index) {
                   return GestureDetector(
                     onTap: () {
-                      context.go(
-                        '/chat_screen',
+                      context.pushNamed(
+                        AppRoute.chatRoom.name,
                         extra: users[index],
                       );
                     },
@@ -53,7 +54,9 @@ class ChatListScreen extends ConsumerWidget {
                             const SizedBox(width: 16),
                             Text(
                               users[index],
-                              style: Theme.of(context).textTheme.bodyMedium,
+                              style: TextStyle(
+                                color: Colors.grey[500],
+                              ),
                             ),
                           ],
                         ),

@@ -17,15 +17,15 @@ class AuthModeSwitch extends StatelessWidget {
       children: [
         Text(
           isLogin ? 'Not a member' : 'Already a member?',
-          style: TextStyle(color: Colors.grey[700]),
+          style: TextStyle(color: Colors.grey[600]),
         ),
         const SizedBox(width: 5),
         GestureDetector(
           onTap: onTap,
           child: Text(
             isLogin ? 'Register now' : 'Login now',
-            style: const TextStyle(
-              color: Colors.black,
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onSurface,
               fontWeight: FontWeight.bold,
             ),
           ),

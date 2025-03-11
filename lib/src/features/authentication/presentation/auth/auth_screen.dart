@@ -2,6 +2,7 @@ import 'package:chat_app/src/features/authentication/presentation/auth/auth_cont
 import 'package:chat_app/src/features/authentication/presentation/auth/widgets/auth_mode_switch.dart';
 import 'package:chat_app/src/features/authentication/presentation/auth/widgets/auth_submit_button.dart';
 import 'package:chat_app/src/features/authentication/presentation/auth/widgets/auth_text_form_field.dart';
+import 'package:chat_app/src/routing/app_router.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -54,7 +55,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
             );
       }
 
-      if (mounted) context.go('/');
+      if (mounted) context.goNamed(AppRoute.splash.name);
     } on FirebaseAuthException catch (error) {
       if (mounted) {
         ScaffoldMessenger.of(context).clearSnackBars();
@@ -71,7 +72,8 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
     final authState = ref.watch(authControllerProvider);
 
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      // backgroundColor: Colors.grey[300],
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
