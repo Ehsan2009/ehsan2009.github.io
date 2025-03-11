@@ -7992,12 +7992,12 @@ alL:function alL(a){this.a=a},
 alK:function alK(){},
 aWU(){return new A.t5()},
 t5:function t5(){this.a=$},
-b1q(a){var s,r=null,q="settings",p=a.iy($.KL(),t.m0),o=p.a
-o=o.agw(o.gpI().jx())
-o=A.aTj(new A.e_(p.ga7O(),o,o.$ti.i("e_<bF.T,pJ?>")))
+b1q(a){var s,r=null,q=a.iy($.KL(),t.m0),p=q.a
+p=p.agw(p.gpI().jx())
+p=A.aTj(new A.e_(q.ga7O(),p,p.$ti.i("e_<bF.T,pJ?>")))
 s=t.yo
-s=A.b([A.O1(new A.ayZ(),"auth","/auth",B.h6),A.O1(new A.az_(),"chatList","/chat-list",A.b([A.O1(new A.az0(),"chatRoom","chat-room",B.h6),A.O1(new A.az1(),q,q,B.h6)],s))],s)
-return A.aTi(!1,new A.az2(),r,r,r,"/auth",r,r,r,!1,o,!0,r,!1,new A.Up(new A.ajU(s,new A.az3(p),5)))},
+s=A.b([A.O1(new A.ayZ(),"auth","/auth",B.h6),A.O1(new A.az_(),"chatList","/chat-list",A.b([A.O1(new A.az0(),"chatRoom","/chat-list/chat-room",B.h6),A.O1(new A.az1(),"settings","/chat-list/settings",B.h6)],s))],s)
+return A.aTi(!1,new A.az2(),r,r,r,"/auth",r,r,r,!1,p,!0,r,!1,new A.Up(new A.ajU(s,new A.az3(q),5)))},
 az3:function az3(a){this.a=a},
 ayZ:function ayZ(){},
 az_:function az_(){},
