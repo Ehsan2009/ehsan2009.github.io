@@ -7996,7 +7996,7 @@ b1q(a){var s,r=null,q="settings",p=a.iy($.KL(),t.m0),o=p.a
 o=o.agw(o.gpI().jx())
 o=A.aTj(new A.e_(p.ga7O(),o,o.$ti.i("e_<bF.T,pJ?>")))
 s=t.yo
-s=A.b([A.O1(new A.ayZ(),"auth","/",B.h6),A.O1(new A.az_(),"chatList","/chat-list",A.b([A.O1(new A.az0(),"chatRoom","chat-room",B.h6),A.O1(new A.az1(),q,q,B.h6)],s))],s)
+s=A.b([A.O1(new A.ayZ(),"auth","/",B.h6),A.O1(new A.az_(),"chatList","chat-list",A.b([A.O1(new A.az0(),"chatRoom","chat-room",B.h6),A.O1(new A.az1(),q,q,B.h6)],s))],s)
 return A.aTi(!1,new A.az2(),r,r,r,"/",r,r,r,!1,o,!0,r,!1,new A.Up(new A.ajU(s,new A.az3(p),5)))},
 az3:function az3(a){this.a=a},
 ayZ:function ayZ(){},
@@ -43839,7 +43839,7 @@ $2(a,b){var s,r,q=this.a.a.giU()
 q=q!=null?A.aAl(q):null
 s=b.b
 r=s.gbF(s)
-if(q!=null){if(r==="/")return"/chat-list"}else if(r==="/chat-list"||r==="/chat-room"||r==="/settings")return"/"
+if(q!=null){if(r==="/")return"chat-list"}else if(r==="/chat-list"||r==="/chat-room"||r==="/settings")return"/"
 return null},
 $S:321}
 A.ayZ.prototype={
