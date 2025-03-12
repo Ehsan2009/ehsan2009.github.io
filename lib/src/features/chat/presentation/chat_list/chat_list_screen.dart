@@ -34,10 +34,8 @@ class ChatListScreen extends ConsumerWidget {
                 itemBuilder: (ctx, index) {
                   return GestureDetector(
                     onTap: () {
-                      context.pushNamed(
-                        AppRoute.chatRoom.name,
-                        extra: users[index],
-                      );
+                      context.goNamed(AppRoute.chatRoom.name,
+                          pathParameters: {'userEmail': users[index]});
                     },
                     child: Card(
                       color: Theme.of(context).cardTheme.color,

@@ -1,6 +1,8 @@
 import 'package:chat_app/src/features/settings/presentation/theme_mode_controller.dart';
+import 'package:chat_app/src/routing/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SettingsScreen extends ConsumerWidget {
@@ -22,6 +24,15 @@ class SettingsScreen extends ConsumerWidget {
           ),
         ),
         centerTitle: true,
+          leading: GestureDetector(
+          onTap: () {
+            context.goNamed(AppRoute.chatList.name);
+          },
+          child: Icon(
+            Icons.arrow_back_ios_new_outlined,
+            color: Colors.grey[700],
+          ),
+        ),
       ),
       body: themeModeAsync.when(
         data: (themeMode) => Card(

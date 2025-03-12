@@ -10,6 +10,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeModeAsync = ref.watch(themeModeControllerProvider);
+    final goRouter = ref.watch(goRouterProvider);
 
     return themeModeAsync.when(
       data: (themeMode) => MaterialApp.router(

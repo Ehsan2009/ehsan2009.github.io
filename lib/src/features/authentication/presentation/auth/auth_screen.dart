@@ -2,11 +2,9 @@ import 'package:chat_app/src/features/authentication/presentation/auth/auth_cont
 import 'package:chat_app/src/features/authentication/presentation/auth/widgets/auth_mode_switch.dart';
 import 'package:chat_app/src/features/authentication/presentation/auth/widgets/auth_submit_button.dart';
 import 'package:chat_app/src/features/authentication/presentation/auth/widgets/auth_text_form_field.dart';
-import 'package:chat_app/src/routing/app_router.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 enum EmailPasswordSignInFormType { signIn, register }
@@ -55,7 +53,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
             );
       }
 
-      if (mounted) context.goNamed(AppRoute.splash.name);
+      // if (mounted) context.goNamed(AppRoute.splash.name);
     } on FirebaseAuthException catch (error) {
       if (mounted) {
         ScaffoldMessenger.of(context).clearSnackBars();

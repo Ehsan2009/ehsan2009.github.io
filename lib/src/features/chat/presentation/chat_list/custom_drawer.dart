@@ -36,7 +36,7 @@ class CustomDrawer extends ConsumerWidget {
               ),
               ListTile(
                 onTap: () {
-                  context.pushNamed(AppRoute.settings.name);
+                  context.goNamed(AppRoute.settings.name);
                 },
                 title: const Text('S E T T I N G S'),
                 leading: Icon(
@@ -48,7 +48,7 @@ class CustomDrawer extends ConsumerWidget {
               ListTile(
                 onTap: () {
                   authRepository.signOut();
-                  context.goNamed(AppRoute.splash.name);
+                  // context.goNamed(AppRoute.splash.name);
                 },
                 title: const Text('L O G O U T'),
                 leading: Icon(

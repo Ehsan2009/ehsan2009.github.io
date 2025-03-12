@@ -3,9 +3,11 @@ import 'package:chat_app/src/features/chat/application/chat_service.dart';
 import 'package:chat_app/src/features/chat/domain/message.dart';
 import 'package:chat_app/src/features/chat/presentation/chat_room/chat_room_controller.dart';
 import 'package:chat_app/src/features/chat/presentation/chat_room/chat_messages.dart';
+import 'package:chat_app/src/routing/app_router.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ChatRoomScreen extends ConsumerStatefulWidget {
@@ -57,15 +59,15 @@ class _ChatRoomScreenState extends ConsumerState<ChatRoomScreen> {
           ),
         ),
         centerTitle: true,
-        // leading: GestureDetector(
-        //   onTap: () {
-        //     context.go('/home_screen');
-        //   },
-        //   child: Icon(
-        //     Icons.arrow_back_ios_new_outlined,
-        //     color: Colors.grey[700],
-        //   ),
-        // ),
+        leading: GestureDetector(
+          onTap: () {
+            context.goNamed(AppRoute.chatList.name);
+          },
+          child: Icon(
+            Icons.arrow_back_ios_new_outlined,
+            color: Colors.grey[700],
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(1),
