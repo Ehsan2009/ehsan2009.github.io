@@ -7997,7 +7997,7 @@ o=o.agA(o.gpJ().jy())
 o=A.aTu(new A.e_(p.ga7S(),o,o.$ti.i("e_<bG.T,pL?>")))
 s=t.yo
 s=A.b([A.O7(new A.az5(),"auth","/",B.h7),A.O7(new A.az6(),"chatList","/chat-list",A.b([A.O7(new A.az7(),"chatRoom","chat-room",B.h7),A.O7(new A.az8(),q,q,B.h7)],s))],s)
-return A.aTt(!0,new A.az9(),r,r,r,"/",r,r,r,!1,o,!0,r,!1,new A.Uv(new A.ak0(s,new A.aza(p),5)))},
+return A.aTt(!0,new A.az9(),r,r,r,r,r,r,r,!1,o,!0,r,!1,new A.Uv(new A.ak0(s,new A.aza(p),5)))},
 aza:function aza(a){this.a=a},
 az5:function az5(){},
 az6:function az6(){},
@@ -88730,8 +88730,7 @@ a9_(a){var s,r,q=null
 $.a8.toString
 s=A.cP($.aO().gA_(),0,q)
 r=(s.gAK()?A.de(q,q,"/",q,s.gw2(),q):s).k(0)
-if(r==="/")return a
-else return r}}
+return r}}
 A.aah.prototype={
 $2(a,b){return new A.o0(this.a,b,null)},
 $S:571}
