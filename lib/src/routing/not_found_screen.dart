@@ -1,16 +1,33 @@
-import 'package:chat_app/src/common_widgets/empty_placeholder_widget.dart';
+import 'package:chat_app/src/features/authentication/data/auth_repository.dart';
+import 'package:chat_app/src/routing/app_router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
-/// Simple not found screen used for 404 errors (page not found on web)
-class NotFoundScreen extends StatelessWidget {
+class NotFoundScreen extends ConsumerWidget {
   const NotFoundScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final authRepository = ref.watch(authRepositoryProvider);
+    final isLoggedIn = authRepository.currentUser != null;
+
     return Scaffold(
       appBar: AppBar(),
-      body: const EmptyPlaceholderWidget(
-        message: '404 - Page not found!',
+      body: Column(
+        children: [
+          const Text('404 - Page not found!'),
+          ElevatedButton(
+            onPressed: () {
+              if (isLoggedIn) {
+                context.goNamed(AppRoute.chatList.name);
+              } else {
+                context.goNamed(AppRoute.auth.name);
+              }
+            },
+            child: Text(isLoggedIn ? 'Go Home' : 'Login'),
+          ),
+        ],
       ),
     );
   }

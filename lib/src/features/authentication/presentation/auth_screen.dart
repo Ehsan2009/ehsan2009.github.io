@@ -1,7 +1,7 @@
-import 'package:chat_app/src/features/authentication/presentation/auth/auth_controller.dart';
-import 'package:chat_app/src/features/authentication/presentation/auth/widgets/auth_mode_switch.dart';
-import 'package:chat_app/src/features/authentication/presentation/auth/widgets/auth_submit_button.dart';
-import 'package:chat_app/src/features/authentication/presentation/auth/widgets/auth_text_form_field.dart';
+import 'package:chat_app/src/features/authentication/presentation/auth_controller.dart';
+import 'package:chat_app/src/features/authentication/presentation/widgets/auth_mode_switch.dart';
+import 'package:chat_app/src/features/authentication/presentation/widgets/auth_submit_button.dart';
+import 'package:chat_app/src/common_widgets/custom_text_form_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -101,7 +101,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
 
                   const SizedBox(height: 24),
 
-                  AuthTextFormField(
+                  CustomTextFormField(
                     hintText: 'Email',
                     validator: (value) {
                       if (value!.isEmpty || !value.contains('@')) {
@@ -116,7 +116,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
 
                   const SizedBox(height: 16),
 
-                  AuthTextFormField(
+                  CustomTextFormField(
                     hintText: 'Password',
                     controller: passwordController,
                     obscureText: true,
@@ -149,7 +149,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
 
                   // password confirm TextFormFields
                   if (!isLogin)
-                    AuthTextFormField(
+                    CustomTextFormField(
                       hintText: 'Confirm password',
                       obscureText: true,
                       validator: (value) {

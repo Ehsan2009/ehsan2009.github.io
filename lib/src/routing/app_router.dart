@@ -1,5 +1,5 @@
 import 'package:chat_app/src/features/authentication/data/auth_repository.dart';
-import 'package:chat_app/src/features/authentication/presentation/auth/auth_screen.dart';
+import 'package:chat_app/src/features/authentication/presentation/auth_screen.dart';
 import 'package:chat_app/src/features/chat/presentation/chat_room/chat_room_screen.dart';
 import 'package:chat_app/src/features/chat/presentation/chat_list/chat_list_screen.dart';
 import 'package:chat_app/src/features/settings/presentation/settings_screen.dart';
@@ -22,18 +22,18 @@ enum AppRoute {
 GoRouter goRouter(Ref ref) {
   final authRepository = ref.watch(authRepositoryProvider);
   return GoRouter(
-    initialLocation: '/',
+    initialLocation: '/auth',
     debugLogDiagnostics: true,
     redirect: (context, state) {
       final isLoggedIn = authRepository.currentUser != null;
       final path = state.uri.path;
       if (isLoggedIn) {
-        if (path == '/') {
+        if (path == '/auth') {
           return '/chat-list';
         }
       } else {
-        if (path.startsWith('/chat-list')) {
-          return '/';
+        if (path == '/chat-list' || path.startsWith('/chat-room') || path == '/settings') {
+          return '/auth';
         }
       }
       return null;
@@ -41,7 +41,7 @@ GoRouter goRouter(Ref ref) {
     refreshListenable: GoRouterRefreshStream(authRepository.authStateChanges()),
     routes: [
       GoRoute(
-        path: '/',
+        path: '/auth',
         name: AppRoute.auth.name,
         builder: (context, state) => const AuthScreen(),
       ),

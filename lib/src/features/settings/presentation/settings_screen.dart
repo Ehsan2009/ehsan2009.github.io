@@ -13,14 +13,14 @@ class SettingsScreen extends ConsumerWidget {
     final themeModeAsync = ref.watch(themeModeControllerProvider);
 
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         title: Text(
           'S E T T I N G S',
-          style: GoogleFonts.roboto(
+          style: TextStyle(
             fontSize: 18,
-            color: Colors.grey[700],
+            color: Theme.of(context).colorScheme.secondary,
           ),
         ),
         centerTitle: true,
@@ -30,14 +30,14 @@ class SettingsScreen extends ConsumerWidget {
           },
           child: Icon(
             Icons.arrow_back_ios_new_outlined,
-            color: Colors.grey[700],
+            color: Theme.of(context).colorScheme.secondary,
           ),
         ),
       ),
       body: themeModeAsync.when(
         data: (themeMode) => Card(
           elevation: 0,
-          color: Theme.of(context).cardTheme.color,
+          color: Theme.of(context).colorScheme.secondary,
           margin: const EdgeInsets.all(24),
           child: Padding(
             padding: const EdgeInsets.all(18),
@@ -46,12 +46,16 @@ class SettingsScreen extends ConsumerWidget {
                 Text(
                   'Dark Mode',
                   style: TextStyle(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    color: Theme.of(context).colorScheme.onSecondary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const Spacer(),
                 Switch(
+                  focusColor: Theme.of(context).colorScheme.onSecondary,
+                  activeTrackColor: Theme.of(context).colorScheme.primaryContainer,
+                  activeColor: Theme.of(context).colorScheme.onPrimaryContainer,
+                  inactiveTrackColor: Theme.of(context).colorScheme.onSecondary,
                   value: themeMode == ThemeMode.dark,
                   onChanged: (value) {
                     ref

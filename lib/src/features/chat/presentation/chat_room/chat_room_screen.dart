@@ -1,3 +1,4 @@
+import 'package:chat_app/src/common_widgets/custom_text_form_field.dart';
 import 'package:chat_app/src/features/authentication/data/auth_repository.dart';
 import 'package:chat_app/src/features/chat/application/chat_service.dart';
 import 'package:chat_app/src/features/chat/domain/message.dart';
@@ -8,7 +9,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ChatRoomScreen extends ConsumerStatefulWidget {
   const ChatRoomScreen({
@@ -48,14 +48,14 @@ class _ChatRoomScreenState extends ConsumerState<ChatRoomScreen> {
     final currentUser = ref.read(authRepositoryProvider).currentUser;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         title: Text(
           widget.userEmail,
-          style: GoogleFonts.roboto(
+          style: TextStyle(
             fontSize: 18,
-            color: Colors.grey[700],
+            color: Theme.of(context).colorScheme.secondary,
           ),
         ),
         centerTitle: true,
@@ -65,7 +65,7 @@ class _ChatRoomScreenState extends ConsumerState<ChatRoomScreen> {
           },
           child: Icon(
             Icons.arrow_back_ios_new_outlined,
-            color: Colors.grey[700],
+            color: Theme.of(context).colorScheme.secondary,
           ),
         ),
       ),
@@ -86,30 +86,10 @@ class _ChatRoomScreenState extends ConsumerState<ChatRoomScreen> {
               padding: const EdgeInsets.all(24),
               child: Row(
                 children: [
-                  // message textformfield
                   Expanded(
-                    child: TextField(
+                    child: CustomTextFormField(
                       controller: messageController,
-                      cursorColor: Colors.black,
-                      decoration: InputDecoration(
-                        hintText: 'Type a message',
-                        hintStyle: Theme.of(context).textTheme.labelMedium,
-                        fillColor: Colors.white54,
-                        filled: true,
-                        floatingLabelBehavior: FloatingLabelBehavior.never,
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16),
-                          borderSide: const BorderSide(
-                            color: Colors.white,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16),
-                          borderSide: const BorderSide(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
+                      hintText: 'Type a message',
                     ),
                   ),
 
@@ -118,6 +98,9 @@ class _ChatRoomScreenState extends ConsumerState<ChatRoomScreen> {
                   // sending button
                   FloatingActionButton(
                     onPressed: () {
+                      if (messageController.text.isEmpty) {
+                        return;
+                      }
                       sendMessage(
                         Message(
                           content: messageController.text,

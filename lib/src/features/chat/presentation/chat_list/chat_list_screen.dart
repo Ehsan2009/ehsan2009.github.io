@@ -11,10 +11,10 @@ class ChatListScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       drawer: const CustomDrawer(),
       appBar: AppBar(
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         title: const Text('U S E R S'),
         centerTitle: true,
       ),
@@ -38,7 +38,7 @@ class ChatListScreen extends ConsumerWidget {
                           pathParameters: {'userEmail': users[index]});
                     },
                     child: Card(
-                      color: Theme.of(context).cardTheme.color,
+                      color: Theme.of(context).colorScheme.secondary,
                       elevation: 20,
                       margin: const EdgeInsets.all(10),
                       child: Padding(
@@ -47,13 +47,13 @@ class ChatListScreen extends ConsumerWidget {
                           children: [
                             Icon(
                               Icons.person,
-                              color: Colors.grey[500],
+                              color: Theme.of(context).colorScheme.onSecondary,
                             ),
                             const SizedBox(width: 16),
                             Text(
                               users[index],
                               style: TextStyle(
-                                color: Colors.grey[500],
+                                color: Theme.of(context).colorScheme.onSecondary,
                               ),
                             ),
                           ],

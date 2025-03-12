@@ -14,7 +14,7 @@ class SettingsRepository {
 
   Future<ThemeMode> themeMode() async {
     final box = await _openBox();
-    final isDarkMode = box.get('isDarkMode', defaultValue: false) as bool;
+    final isDarkMode = box.get('isDarkMode', defaultValue: true) as bool;
     return isDarkMode ? ThemeMode.dark : ThemeMode.light;
   }
 

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-class AuthTextFormField extends StatelessWidget {
-  const AuthTextFormField({
+class CustomTextFormField extends StatelessWidget {
+  const CustomTextFormField({
     super.key,
     required this.hintText,
     this.obscureText,
     this.controller,
-    required this.validator,
+    this.validator,
     this.onSaved,
   });
 
   final String hintText;
   final bool? obscureText;
   final TextEditingController? controller;
-  final String? Function(String?) validator;
+  final String? Function(String?)? validator;
   final void Function(String?)? onSaved;
 
   @override
@@ -25,14 +25,15 @@ class AuthTextFormField extends StatelessWidget {
       style: TextStyle(color: Theme.of(context).colorScheme.secondary),
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: TextStyle(color: Colors.grey[500]),
-        // fillColor: Colors.white54,
+        hintStyle: TextStyle(
+          color: Theme.of(context).colorScheme.secondary,
+        ),
         filled: true,
         floatingLabelBehavior: FloatingLabelBehavior.never,
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(
-            color: Colors.white,
+          borderSide: BorderSide(
+            color: Theme.of(context).colorScheme.secondary,
           ),
         ),
         enabledBorder: OutlineInputBorder(
