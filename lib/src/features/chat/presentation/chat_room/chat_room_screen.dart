@@ -1,4 +1,6 @@
 import 'package:chat_app/src/common_widgets/custom_text_form_field.dart';
+import 'package:chat_app/src/common_widgets/responsive_center.dart';
+import 'package:chat_app/src/constants/breakpoints.dart';
 import 'package:chat_app/src/features/authentication/data/auth_repository.dart';
 import 'package:chat_app/src/features/chat/application/chat_service.dart';
 import 'package:chat_app/src/features/chat/domain/message.dart';
@@ -69,61 +71,68 @@ class _ChatRoomScreenState extends ConsumerState<ChatRoomScreen> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(1),
-        child: Column(
-          children: [
-            // chat messages
-            Expanded(
-              child: ChatMessages(
-                otherUserEmail: widget.userEmail,
-                roomID: roomID,
+      body: ResponsiveCenter(
+        child: Padding(
+          padding: const EdgeInsets.all(1),
+          child: Column(
+            children: [
+              // chat messages
+              Expanded(
+                child: ChatMessages(
+                  otherUserEmail: widget.userEmail,
+                  roomID: roomID,
+                ),
               ),
-            ),
 
-            // sending a new message
-            Padding(
-              padding: const EdgeInsets.all(24),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: CustomTextFormField(
-                      controller: messageController,
-                      hintText: 'Type a message',
-                    ),
-                  ),
-
-                  const SizedBox(width: 16),
-
-                  // sending button
-                  FloatingActionButton(
-                    onPressed: () {
-                      if (messageController.text.isEmpty) {
-                        return;
-                      }
-                      sendMessage(
-                        Message(
-                          content: messageController.text,
-                          roomID: roomID,
-                          senderID: currentUser!.id,
-                          timestamp: DateTime.now(),
+              // sending a new message
+              ResponsiveCenter(
+                maxContentWidth: Breakpoint.tablet,
+                child: Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: CustomTextFormField(
+                          controller: messageController,
+                          hintText: 'Type a message',
                         ),
-                      );
-                    },
-                    elevation: 0,
-                    shape: const CircleBorder(),
-                    backgroundColor: Colors.green,
-                    child: state.isLoading
-                        ? const CircularProgressIndicator()
-                        : const Icon(
-                            Icons.arrow_upward_outlined,
-                            color: Colors.white,
-                          ),
+                      ),
+                
+                      const SizedBox(width: 16),
+                
+                      // sending button
+                      FloatingActionButton(
+                        onPressed: () {
+                          if (messageController.text.isEmpty) {
+                            return;
+                          }
+                          sendMessage(
+                            Message(
+                              content: messageController.text,
+                              roomID: roomID,
+                              senderID: currentUser!.id,
+                              timestamp: DateTime.now(),
+                            ),
+                          );
+                        },
+                        elevation: 0,
+                        shape: const CircleBorder(),
+                        backgroundColor: Colors.green,
+                        child: state.isLoading
+                            ? CircularProgressIndicator(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              )
+                            : const Icon(
+                                Icons.arrow_upward_outlined,
+                                color: Colors.white,
+                              ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

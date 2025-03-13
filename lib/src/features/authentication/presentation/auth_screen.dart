@@ -1,3 +1,5 @@
+import 'package:chat_app/src/common_widgets/responsive_center.dart';
+import 'package:chat_app/src/constants/breakpoints.dart';
 import 'package:chat_app/src/features/authentication/presentation/auth_controller.dart';
 import 'package:chat_app/src/features/authentication/presentation/widgets/auth_mode_switch.dart';
 import 'package:chat_app/src/features/authentication/presentation/widgets/auth_submit_button.dart';
@@ -72,116 +74,122 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       // backgroundColor: Colors.grey[300],
-      body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: EdgeInsets.only(top: height / 5, right: 24, left: 24),
-            child: Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  // adding image
-                  Image.asset(
-                    'assets/images/chat.png',
-                    width: 160,
-                    color: Colors.grey[700],
-                  ),
-
-                  const SizedBox(height: 24),
-
-                  Text(
-                    isLogin
-                        ? 'Welcome back you\'ve been missed!'
-                        : 'Let\'t create an account for you',
-                    style: GoogleFonts.roboto(
-                      fontSize: 18,
-                      color: Colors.grey[700],
+      body: ResponsiveCenter(
+        maxContentWidth: Breakpoint.tablet,
+        child: SingleChildScrollView(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.only(right: 24, left: 24),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    // adding image
+                    Image.asset(
+                      'assets/images/chat.png',
+                      width: 160,
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
-                  ),
-
-                  const SizedBox(height: 24),
-
-                  CustomTextFormField(
-                    hintText: 'Email',
-                    validator: (value) {
-                      if (value!.isEmpty || !value.contains('@')) {
-                        return 'Please enter a valid email address';
-                      }
-                      return null;
-                    },
-                    onSaved: (value) {
-                      enteredEmail = value!.trim();
-                    },
-                  ),
-
-                  const SizedBox(height: 16),
-
-                  CustomTextFormField(
-                    hintText: 'Password',
-                    controller: passwordController,
-                    obscureText: true,
-                    validator: (value) {
-                      if (value!.isEmpty || value.trim().length < 6) {
-                        return 'Please enter a valid password with atleast 6 characters';
-                      }
-                      return null;
-                    },
-                    onSaved: (value) {
-                      enteredPassword = value!;
-                    },
-                  ),
-
-                  if (isLogin) const SizedBox(height: 8),
-
-                  if (isLogin)
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        'Forgot Password?',
-                        style: GoogleFonts.roboto(
-                          fontSize: 14,
-                          color: Colors.grey[700],
-                        ),
+        
+                    const SizedBox(height: 24),
+        
+                    Text(
+                      isLogin
+                          ? 'Welcome back you\'ve been missed!'
+                          : 'Let\'t create an account for you',
+                      style: GoogleFonts.roboto(
+                        fontSize: 18,
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
-
-                  if (!isLogin) const SizedBox(height: 16),
-
-                  // password confirm TextFormFields
-                  if (!isLogin)
+        
+                    const SizedBox(height: 24),
+        
                     CustomTextFormField(
-                      hintText: 'Confirm password',
-                      obscureText: true,
+                      hintText: 'Email',
                       validator: (value) {
-                        if (value!.isEmpty ||
-                            value != passwordController.text) {
-                          return 'Password is not correct';
+                        if (value!.isEmpty || !value.contains('@')) {
+                          return 'Please enter a valid email address';
                         }
                         return null;
                       },
+                      onSaved: (value) {
+                        enteredEmail = value!.trim();
+                      },
                     ),
-
-                  const SizedBox(height: 24),
-
-                  // submit button
-                  AuthSubmitButton(
-                    submit: submit,
-                    isLogin: isLogin,
-                    isAuthenticating: authState.isLoading,
-                  ),
-
-                  const SizedBox(height: 40),
-
-                  // switching between login and sign up modes
-                  AuthModeSwitch(
-                    onTap: () {
-                      setState(() {
-                        isLogin = !isLogin;
-                      });
-                    },
-                    isLogin: isLogin,
-                  ),
-                ],
+        
+                    const SizedBox(height: 16),
+        
+                    CustomTextFormField(
+                      hintText: 'Password',
+                      controller: passwordController,
+                      obscureText: true,
+                      validator: (value) {
+                        if (value!.isEmpty || value.trim().length < 6) {
+                          return 'Please enter a valid password with atleast 6 characters';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        enteredPassword = value!;
+                      },
+                    ),
+        
+                    if (isLogin) const SizedBox(height: 8),
+        
+                    if (isLogin)
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          'Forgot Password?',
+                          style: GoogleFonts.roboto(
+                            fontSize: 14,
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                        ),
+                      ),
+        
+                    if (!isLogin) const SizedBox(height: 16),
+        
+                    // password confirm TextFormFields
+                    if (!isLogin)
+                      ResponsiveCenter(
+                        maxContentWidth: 200,
+                        child: CustomTextFormField(
+                          hintText: 'Confirm password',
+                          obscureText: true,
+                          validator: (value) {
+                            if (value!.isEmpty ||
+                                value != passwordController.text) {
+                              return 'Password is not correct';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+        
+                    const SizedBox(height: 24),
+        
+                    // submit button
+                    AuthSubmitButton(
+                      submit: submit,
+                      isLogin: isLogin,
+                      isAuthenticating: authState.isLoading,
+                    ),
+        
+                    const SizedBox(height: 20),
+        
+                    // switching between login and sign up modes
+                    AuthModeSwitch(
+                      onTap: () {
+                        setState(() {
+                          isLogin = !isLogin;
+                        });
+                      },
+                      isLogin: isLogin,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

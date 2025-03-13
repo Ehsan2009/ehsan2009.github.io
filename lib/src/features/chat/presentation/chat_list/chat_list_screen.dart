@@ -1,5 +1,7 @@
+import 'package:chat_app/src/common_widgets/responsive_center.dart';
+import 'package:chat_app/src/constants/breakpoints.dart';
 import 'package:chat_app/src/features/chat/application/chat_service.dart';
-import 'package:chat_app/src/features/chat/presentation/chat_list/custom_drawer.dart';
+import 'package:chat_app/src/common_widgets/custom_drawer.dart';
 import 'package:chat_app/src/routing/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,10 +14,17 @@ class ChatListScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      drawer: const CustomDrawer(),
+      drawer: const CustomDrawer(
+        currentSection: Section.home,
+      ),
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.surface,
-        title: const Text('U S E R S'),
+        title: Text(
+          'U S E R S',
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.secondary,
+          ),
+        ),
         centerTitle: true,
       ),
       body: FutureBuilder<List<String>>(
@@ -27,41 +36,46 @@ class ChatListScreen extends ConsumerWidget {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData) {
             final users = snapshot.data!;
-            return Padding(
-              padding: const EdgeInsets.all(16),
-              child: ListView.builder(
-                itemCount: users.length,
-                itemBuilder: (ctx, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      context.goNamed(AppRoute.chatRoom.name,
-                          pathParameters: {'userEmail': users[index]});
-                    },
-                    child: Card(
-                      color: Theme.of(context).colorScheme.secondary,
-                      elevation: 20,
-                      margin: const EdgeInsets.all(10),
-                      child: Padding(
-                        padding: const EdgeInsets.all(24),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.person,
-                              color: Theme.of(context).colorScheme.onSecondary,
-                            ),
-                            const SizedBox(width: 16),
-                            Text(
-                              users[index],
-                              style: TextStyle(
-                                color: Theme.of(context).colorScheme.onSecondary,
+            return ResponsiveCenter(
+              maxContentWidth: Breakpoint.tablet,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: ListView.builder(
+                  itemCount: users.length,
+                  itemBuilder: (ctx, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        context.goNamed(AppRoute.chatRoom.name,
+                            pathParameters: {'userEmail': users[index]});
+                      },
+                      child: Card(
+                        color: Theme.of(context).colorScheme.secondary,
+                        elevation: 20,
+                        margin: const EdgeInsets.all(10),
+                        child: Padding(
+                          padding: const EdgeInsets.all(24),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.person,
+                                color:
+                                    Theme.of(context).colorScheme.onSecondary,
                               ),
-                            ),
-                          ],
+                              const SizedBox(width: 16),
+                              Text(
+                                users[index],
+                                style: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.onSecondary,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             );
           }
