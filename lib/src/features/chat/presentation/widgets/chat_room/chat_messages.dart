@@ -6,11 +6,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class ChatMessages extends ConsumerWidget {
   const ChatMessages({
     super.key,
-    required this.otherUserEmail,
     required this.roomID,
   });
 
-  final String otherUserEmail;
   final String roomID;
 
   @override
@@ -55,9 +53,9 @@ class ChatMessages extends ConsumerWidget {
           itemBuilder: (context, index) {
             var message = docs[index]['content'];
             var userId = docs[index]['senderID'];
-
+        
             bool isMe = FirebaseAuth.instance.currentUser!.uid == userId;
-
+        
             return Align(
               alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
               child: Container(

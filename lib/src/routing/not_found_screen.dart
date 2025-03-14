@@ -20,7 +20,7 @@ class NotFoundScreen extends ConsumerWidget {
           ElevatedButton(
             onPressed: () {
               if (isLoggedIn) {
-                context.goNamed(AppRoute.chatList.name);
+                context.goNamed(AppRoute.chat.name);
               } else {
                 context.goNamed(AppRoute.auth.name);
               }

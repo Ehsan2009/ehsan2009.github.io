@@ -1,7 +1,7 @@
 import 'package:chat_app/src/features/authentication/data/auth_repository.dart';
 import 'package:chat_app/src/features/authentication/presentation/auth_screen.dart';
-import 'package:chat_app/src/features/chat/presentation/chat_room/chat_room_screen.dart';
-import 'package:chat_app/src/features/chat/presentation/chat_list/chat_list_screen.dart';
+import 'package:chat_app/src/features/chat/presentation/chat_screen.dart';
+import 'package:chat_app/src/features/chat/presentation/widgets/chat_room/chat_room.dart';
 import 'package:chat_app/src/features/settings/presentation/settings_screen.dart';
 import 'package:chat_app/src/routing/go_router_refresh_stream.dart';
 import 'package:chat_app/src/routing/not_found_screen.dart';
@@ -13,7 +13,7 @@ part 'app_router.g.dart';
 
 enum AppRoute {
   auth,
-  chatList,
+  chat,
   chatRoom,
   settings,
 }
@@ -29,10 +29,10 @@ GoRouter goRouter(Ref ref) {
       final path = state.uri.path;
       if (isLoggedIn) {
         if (path == '/auth') {
-          return '/chat-list';
+          return '/chat';
         }
       } else {
-        if (path == '/chat-list' || path.startsWith('/chat-room') || path == '/settings') {
+        if (path == '/chat' || path.startsWith('/chat-room') || path == '/settings') {
           return '/auth';
         }
       }
@@ -46,16 +46,16 @@ GoRouter goRouter(Ref ref) {
         builder: (context, state) => const AuthScreen(),
       ),
       GoRoute(
-        path: '/chat-list',
-        name: AppRoute.chatList.name,
-        builder: (context, state) => const ChatListScreen(),
+        path: '/chat',
+        name: AppRoute.chat.name,
+        builder: (context, state) => const ChatScreen(),
       ),
       GoRoute(
         path: '/chat-room/:userEmail',
         name: AppRoute.chatRoom.name,
         builder: (context, state) {
-          String userEmail = state.pathParameters['userEmail']!;
-          return ChatRoomScreen(userEmail: userEmail);
+          final otherUserEmail = state.pathParameters['userEmail']!;
+          return ChatRoom(currentContact: otherUserEmail);
         },
       ),
       GoRoute(

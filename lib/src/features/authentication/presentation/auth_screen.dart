@@ -68,7 +68,6 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
     final authState = ref.watch(authControllerProvider);
 
     return Scaffold(
@@ -153,19 +152,16 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
         
                     // password confirm TextFormFields
                     if (!isLogin)
-                      ResponsiveCenter(
-                        maxContentWidth: 200,
-                        child: CustomTextFormField(
-                          hintText: 'Confirm password',
-                          obscureText: true,
-                          validator: (value) {
-                            if (value!.isEmpty ||
-                                value != passwordController.text) {
-                              return 'Password is not correct';
-                            }
-                            return null;
-                          },
-                        ),
+                      CustomTextFormField(
+                        hintText: 'Confirm password',
+                        obscureText: true,
+                        validator: (value) {
+                          if (value!.isEmpty ||
+                              value != passwordController.text) {
+                            return 'Password is not correct';
+                          }
+                          return null;
+                        },
                       ),
         
                     const SizedBox(height: 24),

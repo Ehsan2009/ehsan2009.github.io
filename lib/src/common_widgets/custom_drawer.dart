@@ -36,7 +36,7 @@ class CustomDrawer extends ConsumerWidget {
             const SizedBox(height: 40),
             ListTile(
               onTap: () {
-                context.goNamed(AppRoute.chatList.name);
+                context.goNamed(AppRoute.chat.name);
               },
               title: Text(
                 'H O M E',
