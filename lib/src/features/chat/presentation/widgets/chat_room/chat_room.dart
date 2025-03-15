@@ -8,7 +8,6 @@ import 'package:chat_app/src/features/chat/presentation/widgets/chat_list/chat_l
 import 'package:chat_app/src/features/chat/presentation/widgets/chat_room/chat_room_controller.dart';
 import 'package:chat_app/src/features/chat/presentation/widgets/chat_room/chat_messages.dart';
 import 'package:chat_app/src/routing/app_router.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -28,7 +27,7 @@ class ChatRoom extends ConsumerWidget {
     final chatService = ref.watch(chatServiceProvider);
 
     String roomID = chatService.generateRoomId(
-      FirebaseAuth.instance.currentUser!.email!,
+      currentUser!.email,
       currentContact ?? '',
     );
     var messageController = TextEditingController();
@@ -126,7 +125,7 @@ class ChatRoom extends ConsumerWidget {
                               Message(
                                 content: messageController.text,
                                 roomID: roomID,
-                                senderID: currentUser!.id,
+                                senderID: currentUser.id,
                                 timestamp: DateTime.now(),
                               ),
                             );
